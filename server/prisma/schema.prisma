@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password      String
+  role          Role      @default(user)
+  image         String    @default("")
+  provider      String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  cars          Car[]
+  userBookings  Booking[] @relation("userBooking")
+  ownerBookings Booking[] @relation("ownerBooking")
+}
+
+model Car {
+  id               String    @id @default(cuid())
+  ownerRel         User      @relation(fields: [owner], references: [id])
+  owner            String
+  brand            String
+  model            String
+  image            String
+  year             Int
+  category         String
+  seating_capacity Int
+  fuel_type        String
+  transmission     String
+  pricePerDay      Int
+  location         String
+  description      String
+  isAvailable      Boolean   @default(true)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  Booking          Booking[]
+}
+
+model Booking {
+  id       String @id @default(cuid())
+  carRel   Car    @relation(fields: [car], references: [id])
+  car      String
+  userRel  User   @relation("userBooking", fields: [user], references: [id])
+  user     String
+  ownerRel User   @relation("ownerBooking", fields: [owner], references: [id])
+  owner    String
+
+  pickupDate    DateTime
+  returnDate    DateTime
+  status        Status   @default(pending)
+  price         Int
+  midtransToken String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Status {
+  pending
+  confirmed
+  cancelled
+}
+
+enum Role {
+  owner
+  user
+}
