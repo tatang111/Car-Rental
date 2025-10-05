@@ -67,9 +67,12 @@ const Login = () => {
         toast.error(data.message);
       }
       setShowLogin(false);
-    } catch (error: any) {
-      console.log(error.message);
-      toast.error(error.response.data.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("Something went wrong");
+      }
     }
   };
 

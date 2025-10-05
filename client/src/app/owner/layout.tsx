@@ -2,7 +2,7 @@
 
 import NavbarOwner from '@/components/owner/NavbarOwner'
 import Sidebar from '@/components/owner/Sidebar'
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import { useAuthStore } from '../store/useAuthStore'
 import { useRouter } from 'next/navigation'
 
@@ -15,7 +15,7 @@ const Page = ({children} : {children: ReactNode}) => {
     if (isOwner === false) {
       router.push("/")
     }
-  }, [isOwner])
+  }, [isOwner, router])
 
   return (
     <div className='flex flex-col'>

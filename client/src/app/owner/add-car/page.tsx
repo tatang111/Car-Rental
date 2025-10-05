@@ -24,7 +24,7 @@ const Page = () => {
     description: "",
   });
 
-  const { isPending, mutate, error } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: async () => {
       if (!image) return;
       const formData = new FormData();

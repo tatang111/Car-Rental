@@ -41,9 +41,12 @@ const Navbar = () => {
       } else {
         toast.error(data.message);
       }
-    } catch (error: any) {
-      console.log(error);
-      toast.error(error.response.data.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("Something went wrong");
+      }
     }
   };
 
@@ -67,8 +70,10 @@ const Navbar = () => {
           } else {
             toast.error(data.message);
           }
-        } catch (error: any) {
-          toast.error(error.response.data.message);
+        } catch (error) {
+          if (error instanceof Error) {
+            toast.error(error.message);
+          }
         } finally {
           setLoadingLogin(false);
           setGoogleLoginProcessed(true);

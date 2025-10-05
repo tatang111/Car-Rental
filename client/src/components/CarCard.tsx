@@ -1,5 +1,5 @@
 import { assets } from "@/assets/assets";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { useRouter } from "next/navigation";
 
 export type Car = {
@@ -7,7 +7,7 @@ export type Car = {
   owner: string;
   brand: string;
   model: string;
-  image: any; // or string if it’s a URL
+  image: StaticImageData; // or string if it’s a URL
   year: number;
   category: string;
   seating_capacity: number;

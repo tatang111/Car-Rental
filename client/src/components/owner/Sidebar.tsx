@@ -33,8 +33,10 @@ const Sidebar = () => {
       } else {
         toast.error(data.message);
       }
-    } catch (error: any) {
-      toast.error(error.response.data.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
     }
   };
 

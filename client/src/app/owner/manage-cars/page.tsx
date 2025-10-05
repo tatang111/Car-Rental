@@ -10,13 +10,13 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import Image from "next/image";
 import { toast } from "sonner";
 
 
 const Page = () => {
   const queryClient = useQueryClient()
-  const isOwner = useAuthStore((state) => state.isOwner);
   const currency = process.env.NEXT_PUBLIC_CURRENCY;
 
   const {
@@ -31,7 +31,7 @@ const Page = () => {
     },
   });
 
-  const { mutate: toggleCar, isPending: togglePending } = useMutation({
+  const { mutate: toggleCar } = useMutation({
     mutationFn: async (carId: string) => {
       const { data } = await axiosInstance.post("/owner/toggle-car", { carId });
       return data;
@@ -40,12 +40,12 @@ const Page = () => {
       toast.success(data.message);
       queryClient.invalidateQueries({ queryKey: ["ownerCars"] })
     },
-    onError: (error: any) => {
+    onError: (error: AxiosError<{ message?: string }>) => {
       toast.error(error.response?.data?.message || error.message);
     },
   });
 
-  const { mutate: deleteCar, isPending: deletePending } = useMutation({
+  const { mutate: deleteCar } = useMutation({
     mutationFn: async (carId: string) => {
       const confirm = window.confirm(
         "Are you sure you want to delete this car?"
@@ -58,7 +58,7 @@ const Page = () => {
     onSuccess: (data) => {
       toast.success(data.message);
     },
-    onError: (error: any) => {
+    onError: (error: AxiosError<{ message?: string }>) => {
       toast.error(error.response?.data?.message || error.message);
     },
   });

@@ -23,17 +23,24 @@ declare module "next-auth/jwt" {
 }
 
 declare global {
+  interface MidtransResult {
+    order_id?: string;
+    transaction_status?: string;
+    payment_type?: string;
+    [key: string]: unknown; // fallback for extra fields
+  }
+
   interface Window {
     snap: {
       pay: (
-        token ,
-      options? : {
-        onSuccess?  : (result: any) => void,
-        onPending?: (result: any) => void,
-        onError?: (result: any) => void,
-        onClose?: (result: any) => void,
-      }
-    ) => void;
+        token: string,
+        options?: {
+          onSuccess?: (result: MidtransResult) => void;
+          onPending?: (result: MidtransResult) => void;
+          onError?: (result: MidtransResult) => void;
+          onClose?: () => void;
+        }
+      ) => void;
+    };
   }
-}
 }

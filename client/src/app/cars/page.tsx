@@ -61,7 +61,7 @@ const Page = () => {
 
   useEffect(() => {
     isSearchData && searchCarAvailability();
-  }, []);
+  }, [isSearchData]);
 
   useEffect(() => {
     cars.length > 0 && !isSearchData && applyFilter();

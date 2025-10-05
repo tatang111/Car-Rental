@@ -64,8 +64,8 @@ export const useAuthStore = create<AuthState>((set) => ({
       
       data.success ? set({ cars: data.cars }) : toast.error(data.message)
       
-    } catch (error: any) {
-      toast.error(error.message)
+    } catch (error) {
+      if (error instanceof Error) toast.error(error.message)
     }
   },
 
@@ -80,8 +80,8 @@ export const useAuthStore = create<AuthState>((set) => ({
           isOwner: data.user.role === "owner",
         });
       }
-    } catch (error: any) {
-      console.log(error.message);
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
     }
   },
 }));

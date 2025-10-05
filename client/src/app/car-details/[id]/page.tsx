@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuthStore } from "@/app/store/useAuthStore";
-import { assets, dummyCarData } from "@/assets/assets";
+import { assets } from "@/assets/assets";
 import Loader from "@/components/Loader";
 import { axiosInstance } from "@/lib/axios";
 import { useMutation } from "@tanstack/react-query";

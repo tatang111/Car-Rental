@@ -12,7 +12,7 @@ const Testimonial = () => {
       location: "Surabaya, Jawa Timur",
       image: assets.testimonial_image_1,
       testimonal:
-        "I've rented cars from various companies, but the experience with CarRental was exceptional",
+        "I&apos;ve rented cars from various companies, but the experience with CarRental was exceptional",
     },
     {
       name: "John Smith",
@@ -26,7 +26,7 @@ const Testimonial = () => {
       location: "Jakarta Timur, Jakarta",
       image: assets.testimonial_image_1,
       testimonal:
-        "I highly recommend CarRental! Their fleet is amazing, and I always feel like I'm getting the best deal with excellent service.",
+        "I highly recommend CarRental! Their fleet is amazing, and I always feel like I&apos;m getting the best deal with excellent service.",
     },
   ];
 
