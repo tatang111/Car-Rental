@@ -5,10 +5,11 @@ import userRouter from "./src/routes/user.route.js";
 import ownerRouter from "./src/routes/owner.route.js";
 import bookingRouter from "./src/routes/booking.route.js";
 import midtransRouter from "./src/routes/midtrans.route.js";
+import pkg from "@supabase/supabase-js"
 
 // Initialize express app
 const app = express();
-
+const { createClient } = pkg
 
 // Middleware
 app.use(cors({
@@ -17,6 +18,21 @@ app.use(cors({
 }));
 app.use(express.json());
 
+const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY,
+)
+
+app.get("/ping", async (req, res) => {
+    try {
+        const { data, error } = await supabase.from("user").select("id").limit(1)
+        if (error) throw error;
+        res.json({ message: "Ping successful!", time: new Date().toISOString() });
+    } catch (error) {
+        console.error(err);
+        res.status(500).json({ message: "Ping failed", error: err.message });
+    }
+})
 
 app.get("/", (req, res) => {
     res.send("Server is Running!")
