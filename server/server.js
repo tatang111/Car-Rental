@@ -45,7 +45,7 @@ app.use("/api/owner", ownerRouter)
 app.use("/api/bookings", bookingRouter)
 app.use("/api/midtrans", midtransRouter)
 
-export const handler = serverless(app);
+export default serverless(app);
 const PORT = process.env.PORT || 3001;
 // app.listen(PORT, () => {
 //     console.log(`Server running on http://localhost:${PORT}`)
