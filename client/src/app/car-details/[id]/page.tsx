@@ -64,7 +64,7 @@ const Page = () => {
     onSuccess: ({ bookingData, snapToken }) => {
       toast.success(bookingData.message);
 
-      if (typeof window !== "undefined" && window.snap) {
+      if (snapToken && typeof window !== "undefined" && window.snap) {
         window.snap.pay(snapToken, {
           onSuccess: async (result) => {
             console.log("✅ Payment success:", result);
