@@ -1,7 +1,6 @@
 "use client";
 
 import type { DummyCarData } from "@/app/car-details/[id]/page";
-import { useAuthStore } from "@/app/store/useAuthStore";
 import { assets } from "@/assets/assets";
 import Title from "@/components/owner/Title";
 import { axiosInstance } from "@/lib/axios";

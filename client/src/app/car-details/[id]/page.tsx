@@ -59,8 +59,6 @@ const Page = () => {
         productName: car?.brand,
       });
       
-      console.log(midtransResponse);
-
       return { bookingData: data, snapToken: midtransResponse.token };
     },
     onSuccess: ({ bookingData, snapToken }) => {
@@ -93,8 +91,10 @@ const Page = () => {
       }
       scrollTo(0, 0)
     },
-    onError: (error: any) => {
-      toast.error(error?.response?.data.message || "Booking failed");
+    onError: (error) => {
+      if (error instanceof Error) {
+        toast.error(error?.message || "Booking failed");
+      }
     },
   });
 

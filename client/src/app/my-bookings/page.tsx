@@ -18,7 +18,7 @@ export type Booking = {
   carRel: Car;
   user: string;
   owner: string;
-  midtransToken: string;
+  midtransToken: string ;
   pickupDate: string;
   returnDate: string;
   status: "confirmed" | "pending" | "cancelled";
@@ -50,7 +50,7 @@ const Page = () => {
       (booking) => booking.id === bookingId
     );
 
-    if (typeof window !== "undefined" && window.snap) {
+    if (bookingData?.midtransToken && typeof window !== "undefined" && window.snap) {
       window.snap.pay(bookingData?.midtransToken, {
         onSuccess: async (result) => {
           console.log("✅ Payment success:", result);

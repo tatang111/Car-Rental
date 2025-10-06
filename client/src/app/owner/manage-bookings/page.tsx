@@ -6,7 +6,6 @@ import Title from "@/components/owner/Title";
 import { axiosInstance } from "@/lib/axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const Page = () => {

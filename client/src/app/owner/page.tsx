@@ -1,6 +1,6 @@
 "use client";
 
-import { assets, dummyDashboardData } from "@/assets/assets";
+import { assets } from "@/assets/assets";
 import Title from "@/components/owner/Title";
 import type { DashboardApiResponse, DashboardData } from "@/types/user";
 import { Book } from "lucide-react";

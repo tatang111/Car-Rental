@@ -2,9 +2,8 @@
 
 import { useAuthStore } from "@/app/store/useAuthStore";
 import { assets, menuLinks } from "@/assets/assets";
-import useAuthInit from "@/hooks/useAuthInit";
 import { axiosInstance } from "@/lib/axios";
-import { signIn, signOut, useSession } from "next-auth/react";
+import {  signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -54,11 +53,12 @@ const Navbar = () => {
     if (session?.user && status == "authenticated" && !googleLoginProcessed) {
       const sendToBackend = async () => {
         try {
-          const { email, name } = session.user;
+          const { email, name } = session?.user;
 
           const { data } = await axiosInstance.post("/user/login", {
             email,
             name,
+            image: session.user.image,
             provider: "google",
           });
 

@@ -98,7 +98,9 @@ const Hero = () => {
                 id="return-date"
                 min={
                   pickupDate
-                    ? pickupDate.toISOString().split("T")[0]
+                    ? new Date(pickupDate.getTime() + 24 * 60 * 60 * 1000)
+                        .toISOString()
+                        .split("T")[0]
                     : new Date().toISOString().split("T")[0]
                 }
                 className="text-sm text-gray-500"
@@ -114,8 +116,8 @@ const Hero = () => {
           className="flex items-center justify-center gap-1 px-9 py-3 max-sm:mt-4 bg-primary hover:bg-primary-dull text-white rounded-full cursor-pointer"
         >
           <Image
-          width={16}
-          height={16}
+            width={16}
+            height={16}
             src={assets.search_icon}
             alt="Search"
             className="brightness-300"

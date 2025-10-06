@@ -53,7 +53,7 @@ export const registerUser = async (req, res) => {
 // Login user
 export const loginUser = async (req, res) => {
     try {
-        const { email, password, provider, name } = req.body;
+        const { email, password, provider, name, image } = req.body;
 
         let user = await prisma.user.findUnique({ where: { email } });
 
@@ -63,10 +63,12 @@ export const loginUser = async (req, res) => {
                     data: {
                         name,
                         email,
+                        image,
                         password: await bcrypt.hash("GOOGLE_SECRET", 10),
                         provider: "google",
                     },
                 });
+
                 const token = generateToken(newUser.id.toString());
                 return res.status(200).json({ success: true, token });
             } else {

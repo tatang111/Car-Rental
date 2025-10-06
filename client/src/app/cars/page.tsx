@@ -5,7 +5,7 @@ import CarCard from "@/components/CarCard";
 import Title from "@/components/Title";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Car } from "@/types/user";
 import { axiosInstance } from "@/lib/axios";
@@ -13,6 +13,14 @@ import { toast } from "sonner";
 import { motion } from "motion/react";
 
 const Page = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+        <CarsPageInner />
+    </Suspense>
+  )
+}
+
+function CarsPageInner ()  {
   const {cars, searchQuery, setSearchQuery} = useAuthStore();
   const [filteredCars, setFilteredCars] = useState<Car[]>([]);
 
