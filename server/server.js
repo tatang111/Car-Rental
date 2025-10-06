@@ -25,7 +25,7 @@ const supabase = createClient(
 
 app.get("/ping", async (req, res) => {
     try {
-        const { data, error } = await supabase.from("user").select("id").limit(1)
+        const { data, error } = await supabase.from("User").select("id").limit(1)
         if (error) throw error;
         res.json({ message: "Ping successful!", time: new Date().toISOString() });
     } catch (error) {
