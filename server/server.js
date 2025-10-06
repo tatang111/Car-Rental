@@ -31,7 +31,7 @@ app.get("/ping", async (req, res) => {
         res.json({ message: "Ping successful!", time: new Date().toISOString() });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Ping failed", error: err.message });
+        res.status(500).json({ message: "Ping failed", error: error.message });
     }
 })
 
