@@ -6,7 +6,6 @@ import ownerRouter from "./src/routes/owner.route.js";
 import bookingRouter from "./src/routes/booking.route.js";
 import midtransRouter from "./src/routes/midtrans.route.js";
 import pkg from "@supabase/supabase-js"
-import serverless from "serverless-http"
 
 // Initialize express app
 const app = express();
@@ -45,8 +44,7 @@ app.use("/api/owner", ownerRouter)
 app.use("/api/bookings", bookingRouter)
 app.use("/api/midtrans", midtransRouter)
 
-export default serverless(app);
 const PORT = process.env.PORT || 3001;
-// app.listen(PORT, () => {
-//     console.log(`Server running on http://localhost:${PORT}`)
-// })
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`)
+})
