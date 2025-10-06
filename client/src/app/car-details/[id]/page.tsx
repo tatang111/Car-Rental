@@ -67,12 +67,14 @@ const Page = () => {
       if (snapToken && typeof window !== "undefined" && window.snap) {
         window.snap.pay(snapToken, {
           onSuccess: async (result) => {
+            console.log(bookingData)
             console.log("✅ Payment success:", result);
             toast.success("Payment successfull");
             await axiosInstance.post("/bookings/change-status", {
-              bookingId: bookingData.id,
+              bookingId: bookingData.booking.id,
               status: "confirmed",
             });
+            router.push("/my-bookings")
           },
           onPending: (result) => {
             console.log("⌛ Payment pending:", result);
