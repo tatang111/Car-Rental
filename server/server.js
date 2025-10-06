@@ -6,6 +6,7 @@ import ownerRouter from "./src/routes/owner.route.js";
 import bookingRouter from "./src/routes/booking.route.js";
 import midtransRouter from "./src/routes/midtrans.route.js";
 import pkg from "@supabase/supabase-js"
+import serverless from "serverless-http"
 
 // Initialize express app
 const app = express();
@@ -29,7 +30,7 @@ app.get("/ping", async (req, res) => {
         if (error) throw error;
         res.json({ message: "Ping successful!", time: new Date().toISOString() });
     } catch (error) {
-        console.error(err);
+        console.error(error);
         res.status(500).json({ message: "Ping failed", error: err.message });
     }
 })
@@ -44,8 +45,8 @@ app.use("/api/owner", ownerRouter)
 app.use("/api/bookings", bookingRouter)
 app.use("/api/midtrans", midtransRouter)
 
-
+export const handler = serverless(app);
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`)
-})
+// app.listen(PORT, () => {
+//     console.log(`Server running on http://localhost:${PORT}`)
+// })
